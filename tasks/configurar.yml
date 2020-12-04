@@ -46,8 +46,16 @@
     dest: "{{ INSTALACAO_PASTA_JIBRI }}/{{item}}"
   with_items:
     - ffmpeg-serpro
-  tags: compose
   when: instalar_jibri | bool
+
+- name: Copiar configuracao customizada do jitsi
+  template:
+    src: opt/jitsi/web/{{item}}
+    dest: "{{ INSTALACAO_PASTA_WEB }}"
+  with_items:
+    - custom-config.js
+    - interface_config.js
+  register: reiniciar_stack
 
 - name: Compose file mudou. Reconstruindo o stack
   shell: |
@@ -57,3 +65,10 @@
   args:
     chdir: "{{ INSTALACAO_PASTA }}/"
   when: compose_file_status.changed
+
+- name: Reiniciar Stack
+  shell: |
+    docker-compose restart
+  args:
+    chdir: "{{ INSTALACAO_PASTA }}/"
+  when: reiniciar_stack.changed
