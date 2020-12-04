@@ -1,0 +1,58 @@
+---
+- name: Instalar Jitsi Stack
+  hosts: all
+  become: yes
+
+  vars:
+    pip_install_packages:
+      - name: docker
+    pacotes_deb:
+      - linux-image-extra-virtual
+      - ngrep
+      - iftop
+      - glances
+      - docker-ce
+      - sngrep
+      # - docker-compose
+    pacotes_centos:
+      - ngrep
+      - iftop
+      - glances
+      - docker-ce
+      - docker-compose
+  vars_files:
+    # - vars/docker.yml
+    # - vars/jibri.yml
+  pre_tasks:
+    - name: Informações sobre o host
+      debug:
+        msg:
+          - "Usuário ansible: {{ ansible_user }}"
+          - "Endereço IP: {{ ansible_host }}"
+
+    - name: Adicionar repositorio do Serpro
+      apt_repository:
+        repo: "{{ item }}"
+        state: present
+      with_items:
+        - deb [trusted=yes] http://update.blm.serpro/ubuntu-18.04 bionic-archive-serpro partner
+        - deb [trusted=yes] http://update.blm.serpro/ubuntu-18.04 bionic main restricted universe multiverse
+        - deb [trusted=yes] http://update.blm.serpro/ubuntu-18.04 bionic-regionais blm
+        - deb [trusted=yes] http://update.blm.serpro/ubuntu-18.04 bionic-serpro local
+      tags: repositorios
+      when:
+        - ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+        - instalar_repositorio_serpro | bool
+
+    - name: atualizar cache apt
+      apt:
+        cache_valid_time: 86400 # um dia
+
+  tasks:
+    - include_tasks: tasks/instalar.yml
+    - include_tasks: tasks/configurar.yml
+      tags: configurar
+
+  # roles:
+  #   - ansible-role-docker
+  #   - ansible-role-pip

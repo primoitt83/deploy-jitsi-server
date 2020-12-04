@@ -1,0 +1,46 @@
+---
+- name: Configurar interface ALSA Loopback
+  lineinfile:
+    dest: /etc/modprobe.d/alsa-loopback.conf
+    state: "present"
+    regexp: "^options snd-aloop enable=1,1,1,1,1 index=0,1,2,3,4"
+    line: "options snd-aloop enable=1,1,1,1,1 index=0,1,2,3,4"
+    create: yes
+  when: instalar_jibri
+
+- name: caregar módulo kernel do snd-aloop
+  modprobe:
+    name: snd-aloop
+    state: present
+  when: instalar_jibri
+
+- name: Criar pasta de instalação e config
+  file:
+    path: "{{ INSTALACAO_PASTA }}/{{ CONFIG_PASTA }}"
+    state: directory
+    recurse: yes
+
+- name: Copiar assets gráficos do serpro
+  copy:
+    src:  files/imagens
+    dest: "{{ INSTALACAO_PASTA }}/"
+  tags: assets_graficos
+
+- name: Copiar compose file
+  template:
+    src: opt/jitsi/web/{{item}}
+    dest: "{{ INSTALACAO_PASTA }}/{{item}}"
+  with_items:
+    - docker-compose.yml
+    - ffmpeg-serpro
+  tags: compose
+  register: compose_file_status
+
+- name: Compose file mudou. Reconstruindo o stack
+  shell: |
+    docker-compose stop
+    docker-compose rm -f
+    docker-compose up -d
+  args:
+    chdir: "{{ INSTALACAO_PASTA }}/"
+  when: compose_file_status.changed

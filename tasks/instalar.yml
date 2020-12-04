@@ -1,0 +1,12 @@
+---
+- name: Instalar pacotes deb
+  package:
+    name: "{{ pacotes_deb }}"
+    state: present
+  when: ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+
+- name: Instalar pacotes rpm
+  package:
+    name: "{{ pacotes_centos }}"
+    state: present
+  when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat'
