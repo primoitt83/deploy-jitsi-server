@@ -1,5 +1,20 @@
 # variáveis padrão. alterar de modo a refletir ambiente
+#
+# Configurações Básicas
+#
+HTTP_PORT: 80
+HTTPS_PORT: 443
+TZ: America/Fortaleza
+PUBLIC_URL: https://chama-homologacao.serpro.gov.br
+DOCKER_HOST_ADDRESS: "{{ansible_host}}"
+ENABLE_LOBBY: 1
 instalar_repositorio_serpro: false
+#
+# Escolher quais serviços instalar
+#
+instalar_web: true
+instalar_prosody: true
+instalar_jicofo: true
 instalar_jvb: true
 instalar_jibri: false
 
@@ -8,8 +23,15 @@ IMAGEM_NOME_WEB: jitsi/web
 IMAGEM_NOME_PROSODY: jitsi/prosody
 IMAGEM_NOME_JICOFO: jitsi/jicofo
 IMAGEM_NOME_JVB: jitsi/jvb
+IMAGEM_NOME_JIBRI: jitsi/jibri
 
-INSTALACAO_PASTA: /opt/jitsi/web
+INSTALACAO_PASTA: /opt/jitsi
+INSTALACAO_PASTA_WEB: "{{INSTALACAO_PASTA}}/web"
+INSTALACAO_PASTA_PROSODY: "{{INSTALACAO_PASTA}}/prosody"
+INSTALACAO_PASTA_JICOFO: "{{INSTALACAO_PASTA}}/jicofo"
+INSTALACAO_PASTA_JVB: "{{INSTALACAO_PASTA}}/jvb"
+INSTALACAO_PASTA_JIBRI: "{{INSTALACAO_PASTA}}/jibri"
+
 CONFIG_PASTA: config
 REFLETORA_IP: 161.148.200.152
 REFLETORA_PORTA: 1935
@@ -26,15 +48,6 @@ JVB_AUTH_PASSWORD: SENHA_PADRAO_ME_TROQUE
 JIGASI_XMPP_PASSWORD: SENHA_PADRAO_ME_TROQUE
 JIBRI_RECORDER_PASSWORD: SENHA_PADRAO_ME_TROQUE
 JIBRI_XMPP_PASSWORD: SENHA_PADRAO_ME_TROQUE
-#
-# Configurações Básicas
-#
-HTTP_PORT: 8080
-HTTPS_PORT: 8443
-TZ: America/Fortaleza
-PUBLIC_URL: https://chama-homologacao.serpro.gov.br
-DOCKER_HOST_ADDRESS: "{{ansible_host}}"
-ENABLE_LOBBY: 1
 #
 # Configuração Lets Encrypt
 #
