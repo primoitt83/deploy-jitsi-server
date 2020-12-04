@@ -1,0 +1,25 @@
+#!/bin/bash
+
+COMANDO="/usr/bin/ffmpeg-original"
+
+while test $# -gt 0
+do
+    T="$1"
+    if [ "${T:0:32}" == "rtmp://a.rtmp.youtube.com/live2/" ]; then
+        COMANDO="$COMANDO rtmp://{{ REFLETORA_IP }}:{{ REFLETORA_PORTA }}/live/${T:32}"
+    else
+        COMANDO="$COMANDO $T"
+    fi
+    shift
+done
+
+#Versao nova do Jibri ja corrigiu
+COMANDO=$(echo "$COMANDO" | sed 's/44100/44100 -af aresample=async=1/')
+
+echo "Llamando a ffmpeg sustituyendo rtmp si hay: «$COMAND»."
+
+exec $COMANDO
+PROCESO_FFMPEG=$!
+
+echo "Esperando finalización del proceso: ${PROCESO_FFMPEG}."
+wait $PROCESO_FFMPEG
