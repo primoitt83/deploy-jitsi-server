@@ -68,5 +68,10 @@ Vagrant.configure("2") do |config|
   # SHELL
   config.vm.provision "ansible" do |ansible|
     ansible.playbook = "main.yml"
+    ansible.extra_vars = {
+      ansible_python_interpreter: "/usr/bin/python3",
+      instalar_repositorio_docker: true,
+      DOCKER_HOST_ADDRESS: "192.168.33.10",
+    }
   end
 end
