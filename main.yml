@@ -24,6 +24,10 @@
     # - vars/docker.yml
     # - vars/jibri.yml
   pre_tasks:
+    - name: atualizar cache apt
+      apt:
+        cache_valid_time: 86400 # um dia
+
     - name: Informações sobre o host
       debug:
         msg:
@@ -44,9 +48,51 @@
         - ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
         - instalar_repositorio_serpro | bool
 
-    - name: atualizar cache apt
-      apt:
-        cache_valid_time: 86400 # um dia
+    - name: Instalar pré requisitos
+      apt: name={{ item }} state=latest update_cache=yes
+      loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools']
+      when:
+        - ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+        - instalar_repositorio_docker | bool
+
+    - name: Adicionar chave GPG
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+      when:
+        - ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+        - instalar_repositorio_docker | bool
+
+    - name: Adicionar repositório oficial docker
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu bionic stable
+        state: present
+      when:
+        - ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+        - instalar_repositorio_docker | bool
+
+    - name: Atualizar cache apt
+      apt: update_cache=yes name=docker-ce state=latest
+      when:
+        - ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+        - instalar_repositorio_docker | bool
+
+    - name: instalar docker-compose
+      get_url:
+        url: https://github.com/docker/compose/releases/download/1.27.4/docker-compose-Linux-x86_64
+        dest: /usr/local/bin/docker-compose
+        mode: 0755
+      when:
+        - ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+        - instalar_repositorio_docker | bool
+
+    # - name: instalar módulo docker p/python
+    #   pip:
+    #     name: docker
+    #   when:
+    #     - ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
+    #     - instalar_repositorio_docker | bool
+
 
   tasks:
     - include_tasks: tasks/instalar.yml

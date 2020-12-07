@@ -9,6 +9,7 @@ PUBLIC_URL: https://chama-homologacao.serpro.gov.br
 DOCKER_HOST_ADDRESS: "{{ansible_host}}"
 ENABLE_LOBBY: 1
 instalar_repositorio_serpro: false
+instalar_repositorio_docker: true
 #
 # Escolher quais serviços instalar
 #
