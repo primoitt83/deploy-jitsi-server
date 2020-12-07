@@ -1,24 +1,9 @@
 
-# Created by https://www.toptal.com/developers/gitignore/api/macos,linux,ansible
-# Edit at https://www.toptal.com/developers/gitignore?templates=macos,linux,ansible
+# Created by https://www.toptal.com/developers/gitignore/api/vagrant,macos,ansible
+# Edit at https://www.toptal.com/developers/gitignore?templates=vagrant,macos,ansible
 
 ### Ansible ###
 *.retry
-
-### Linux ###
-*~
-
-# temporary files which can be created if a process still has a handle open of a deleted file
-.fuse_hidden*
-
-# KDE directory preferences
-.directory
-
-# Linux trash folder which might appear on any partition or disk
-.Trash-*
-
-# .nfs files are created when an open file is removed but is still being accessed
-.nfs*
 
 ### macOS ###
 # General
@@ -49,4 +34,14 @@ Network Trash Folder
 Temporary Items
 .apdisk
 
-# End of https://www.toptal.com/developers/gitignore/api/macos,linux,ansible
+### Vagrant ###
+# General
+.vagrant/
+
+# Log files (if you are creating logs in debug mode, uncomment this)
+# *.log
+
+### Vagrant Patch ###
+*.box
+
+# End of https://www.toptal.com/developers/gitignore/api/vagrant,macos,ansible
