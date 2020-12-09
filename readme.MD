@@ -18,6 +18,13 @@ Com vagrant:
 vagrant up
 ```
 
+Com Ansible rodando localmente (usuário root):
+
+Obs. : é necessário trocar chaves ssh previamente
+```sh
+ansible-playbook -i localhost, -u root main.yml
+```
+
 ## Configuração
 
 ### Parâmetros
