@@ -15,11 +15,11 @@ REFLETORA_PORTA: 1935
 #
 # Escolher quais serviços instalar
 #
-instalar_web: true
-instalar_prosody: true
-instalar_jicofo: true
-instalar_jvb: true
-instalar_jibri: false
+INSTALAR_SERVICO_WEB: true
+INSTALAR_SERVICO_PROSODY: true
+INSTALAR_SERVICO_JICOFO: true
+INSTALAR_SERVICO_JVB: true
+INSTALAR_SERVICO_JIBRI: false
 
 IMAGEM_TAG: stable-5142
 IMAGEM_NOME_WEB: jitsi/web

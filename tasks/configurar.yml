@@ -6,13 +6,13 @@
     regexp: "^options snd-aloop enable=1,1,1,1,1 index=0,1,2,3,4"
     line: "options snd-aloop enable=1,1,1,1,1 index=0,1,2,3,4"
     create: yes
-  when: instalar_jibri
+  when: INSTALAR_SERVICO_JIBRI
 
 - name: caregar módulo kernel do snd-aloop
   modprobe:
     name: snd-aloop
     state: present
-  when: instalar_jibri
+  when: INSTALAR_SERVICO_JIBRI
 
 - name: Criar pasta de instalação e config
   file:
@@ -25,7 +25,7 @@
     src:  files/imagens
     dest: "{{ INSTALACAO_PASTA_WEB }}/"
   tags: assets_graficos
-  when: instalar_web | bool
+  when: INSTALAR_SERVICO_WEB | bool
 
 - name: Copiar compose file
   template:
@@ -46,7 +46,7 @@
     dest: "{{ INSTALACAO_PASTA_JIBRI }}/{{item}}"
   with_items:
     - ffmpeg-serpro
-  when: instalar_jibri | bool
+  when: INSTALAR_SERVICO_JIBRI | bool
 
 - name: Copiar configuracao customizada do jitsi
   template:
