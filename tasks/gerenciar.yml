@@ -1,23 +1,23 @@
 ---
-- name: "Armazenar informações sobre container {{CONTAINER_NOME_WEB}}"
+- name: "Coletar informações sobre container {{container_nome}}"
   docker_container_info:
-    name: "{{CONTAINER_NOME_WEB}}"
+    name: "{{container_nome}}"
   register: stack_resultado
 
-- name: Does container exist?
-  debug:
-    msg: "The container {{ 'exists' if stack_resultado.exists else 'does not exist' }}"
-- name: Compose file mudou. Reconstruindo o stack
+- name: Iniciar stack se {{container_nome}} inexistente
   shell: |
     docker-compose up -d
   args:
     chdir: "{{ INSTALACAO_PASTA }}/"
-  when:
-    - not stack_resultado.exists
-    - "{{ stack_resultado.container['State']['Status'] }} != running"
+  when: not stack_resultado.exists
 
-
-- name: Print the status of the container
-  debug:
-    msg: "The container status is {{ stack_resultado.container['State']['Status'] }}"
-  when: stack_resultado.exists
+- name: "Iniciar stack se {{container_nome}} parado: {{ stack_resultado.container['State']['Status'] }}"
+  shell: |
+    docker-compose up -d
+  args:
+    chdir: "{{ INSTALACAO_PASTA }}/"
+  when: stack_resultado.container['State']['Status'] != "running"
+#
+# - name: teste de concatenacao
+#   debug:
+#     msg: "{{ container_nome.split("_")[1] }}"

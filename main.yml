@@ -98,6 +98,13 @@
     - include_tasks: tasks/instalar.yml
     - include_tasks: tasks/configurar.yml
     - include_tasks: tasks/gerenciar.yml
+      loop:
+        - "{{CONTAINER_NOME_WEB}}"
+        - "{{CONTAINER_NOME_PROSODY}}"
+        - "{{CONTAINER_NOME_JICOFO}}"
+        - "{{CONTAINER_NOME_JVB}}"
+      loop_control:
+        loop_var: container_nome
       tags: configurar
 
   # roles:
