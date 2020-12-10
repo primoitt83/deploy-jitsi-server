@@ -34,7 +34,7 @@
           - "Usuário ansible: {{ ansible_user }}"
           - "Endereço IP: {{ ansible_host }}"
 
-    - name: Adicionar repositorio do Serpro
+    - name: Adicionar repositorio do Serpro: {{instalar_repositorio_docker}}
       apt_repository:
         repo: "{{ item }}"
         state: present
@@ -55,7 +55,7 @@
         - ansible_distribution == 'Debian' or ansible_distribution == 'Ubuntu'
         - instalar_repositorio_docker | bool
 
-    - name: Adicionar chave GPG
+    - name: Adicionar chave GPG: {{instalar_repositorio_docker}}
       apt_key:
         url: https://download.docker.com/linux/ubuntu/gpg
         state: present
