@@ -1,7 +1,0 @@
-# ---
-# - src: git@git.serpro:opsmc/ansible/roles/ansible-role-docker.git
-#   scm: git
-#   name: ansible-role-docker
-# - src: git@git.serpro:opsmc/ansible/roles/ansible-role-pip.git
-#   scm: git
-#   name: ansible-role-pip
