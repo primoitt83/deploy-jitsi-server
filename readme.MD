@@ -21,8 +21,27 @@ vagrant up
 Com Ansible rodando localmente (usuário root):
 
 Obs. : é necessário trocar chaves ssh previamente
+
+**Instalação parâmetros default:**
 ```sh
 ansible-playbook -i localhost, -u root main.yml
+```
+
+**Instalação utilizando parâmetros básicos customizados:**
+
+Obs. : O comando a seguir utiliza dados fictícios.
+```sh
+ansible-playbook -i localhost, -u root \
+  -e PUBLIC_URL=https://videoconfqualquer.serpro.gov.br \
+  -e DOCKER_HOST_ADDRESS=148.166.15.6 \
+  -e ENABLE_LOBBY=1 \
+  -e ENABLE_LETSENCRYPT=1 \
+  -e LETSENCRYPT_DOMAIN=videoconfqualquer.serpro.gov.br \
+  -e LETSENCRYPT_EMAIL=email@mail.com \
+  -e ENABLE_HTTP_REDIRECT=1 \
+  -e ansible_python_interpreter=/usr/bin/python3  \
+  -e IMAGEM_TAG=stable-5142-3 \
+  /usr/src/deploy-jitsi-server/main.yml
 ```
 
 ## Configuração
