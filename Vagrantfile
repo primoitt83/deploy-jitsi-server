@@ -71,6 +71,7 @@ Vagrant.configure("2") do |config|
     ansible.extra_vars = {
       ansible_python_interpreter: "/usr/bin/python3",
       instalar_repositorio_docker: true,
+      instalar_repositorio_serpro: false,
       DOCKER_HOST_ADDRESS: "192.168.33.10",
     }
   end
