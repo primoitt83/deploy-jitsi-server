@@ -68,7 +68,7 @@
 
 - name: Reiniciar Stack
   shell: |
-    docker-compose restart
+    docker-compose restart || true
   args:
     chdir: "{{ INSTALACAO_PASTA }}/"
   when: reiniciar_stack.changed
