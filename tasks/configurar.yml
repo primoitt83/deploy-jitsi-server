@@ -1,5 +1,5 @@
 ---
-- name: Configurar interface ALSA Loopback: {{INSTALAR_SERVICO_JIBRI}}
+- name: "Configurar interface ALSA Loopback: {{INSTALAR_SERVICO_JIBRI}}"
   lineinfile:
     dest: /etc/modprobe.d/alsa-loopback.conf
     state: "present"
@@ -8,7 +8,7 @@
     create: yes
   when: INSTALAR_SERVICO_JIBRI
 
-- name: Carregar módulo kernel do snd-aloop: {{INSTALAR_SERVICO_JIBRI}}
+- name: "Carregar módulo kernel do snd-aloop: {{INSTALAR_SERVICO_JIBRI}}"
   modprobe:
     name: snd-aloop
     state: present
@@ -40,7 +40,7 @@
     msg:
       - Status do arquivo compose - {{compose_file_status.changed}}
 
-- name: Copiar arquivos do jibri: {{INSTALAR_SERVICO_JIBRI}}
+- name: "Copiar arquivos do jibri: {{INSTALAR_SERVICO_JIBRI}}"
   template:
     src: opt/jitsi/jibri/{{item}}
     dest: "{{ INSTALACAO_PASTA_JIBRI }}/{{item}}"
