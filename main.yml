@@ -34,7 +34,7 @@
           - "Usuário ansible: {{ ansible_user }}"
           - "Endereço IP: {{ ansible_host }}"
 
-    - name: "Adicionar repositorio do Serpro: {{instalar_repositorio_docker}}"
+    - name: "Adicionar repositorio do Serpro: {{instalar_repositorio_serpro}}"
       apt_repository:
         repo: "{{ item }}"
         state: present
