@@ -8,7 +8,7 @@ TZ: America/Fortaleza
 PUBLIC_URL: https://chama-homologacao.serpro.gov.br
 DOCKER_HOST_ADDRESS: "{{ansible_host}}"
 ENABLE_LOBBY: 1
-instalar_repositorio_serpro: false
+instalar_repositorio_serpro: true
 instalar_repositorio_docker: false
 REFLETORA_IP: 161.148.200.152
 REFLETORA_PORTA: 1935
