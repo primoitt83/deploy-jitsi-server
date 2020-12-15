@@ -7,9 +7,11 @@ import sys
 import json
 import getopt
 
-versao= '1.1'
+versao= '1.2'
 servidor = "localhost"
 porta = "8081"
+sys.tracebacklimit = 0
+
 
 def exibir_help():
     print(
@@ -40,13 +42,11 @@ jitsi-stats -s 192.168.0.10 -p 8080 -P conferences
 Exibir multiplos parâmetros 'conferences,participants' do servidor 192.168.0.10 que escuta na porta 8080
 jitsi-stats -s 192.168.0.10 -p 8080 -P conferences,participants
 
-AUTOR: Antonio Alisio de Meneses Cordeiro - alisio.cordeiro@serpro.gov.br
+AUTOR: Antonio Alisio de Meneses Cordeiro
 
     '''
     )
     quit()
-
-
 
 options, remainder = getopt.getopt(sys.argv[1:], 's:p:P:h', ['servidor=',
                                                          'porta=',
@@ -64,8 +64,12 @@ for opt, arg in options:
     elif opt in ('-h', '--help'):
         exibir_help()
 
+try:
+    resposta = requests.get("http://" + servidor + ":" + porta + "/colibri/stats")
+except:
+    print ("Não foi possível conectar no servidor " + servidor + ":" + porta + ".")
+    quit()
 
-resposta = requests.get("http://" + servidor + ":" + porta + "/colibri/stats")
 try:
     parametros
 except NameError:
