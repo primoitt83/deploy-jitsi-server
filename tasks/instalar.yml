@@ -10,3 +10,13 @@
     name: "{{ pacotes_centos }}"
     state: present
   when: ansible_distribution == 'CentOS' or ansible_distribution == 'Red Hat'
+
+- name: Instalar arquivos de apoio
+  copy:
+    src: "{{ item.src }}"
+    dest: "{{ item.dest }}"
+    owner: "{{ item.owner }}"
+    group: "{{ item.group }}"
+    mode: "{{item.mode}}"
+  with_items:
+     - { src: files/usr/local/bin/jitsi-stats, dest: /usr/local/bin/jitsi-stats, owner: root, group: root, mode: '0755' }

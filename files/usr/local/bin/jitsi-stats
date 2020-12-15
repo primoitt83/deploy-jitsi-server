@@ -1,8 +1,75 @@
 #!/usr/bin/env python3
+#-*- coding:utf-8 -*-
+# Conecta no servidor jitsi JVB, coleta statísticas e exibe a informação desejada
+# uso:
+#   jitsi-stats [-s <IP_DO_SERVIDOR>] [-p <PORTA_DA_INTERFACE_COLIBRI>] [-P <NOME_DO_PARAMETRO>]
+#
+# Onde:
+#   -s, --servidor      endereço IP do servidor a se conectar. Default: localhost
+#   -p, --porta         porta da interface rest colibri. Default: 8081
+#   -P, --parametros    parâmetros a exibir separado por virgula. Default: mostra todos os parâmetros
+#
+# Exemplo:
+#
+#  Exibir todas as parâmetros do servidor localhost:
+#
+#    jitsi-stats
+#
+# Exibir todos os parâmetros do servidor 192.168.0.10
+#
+#   jitsi-stats -s 192.168.0.10
+#
+# Exibir parâmetro 'conferences' do servidor 192.168.0.10 que escuta na porta 8080
+#
+# jitsi-stats -s 192.168.0.10 -p 8080 -P conferences
+#
+# Exibir multiplos parâmetros 'conferences,participants' do servidor 192.168.0.10 que escuta na porta 8080
+# jitsi-stats -s 192.168.0.10 -p 8080 -P conferences,participants
+#
+# AUTOR: Antonio Alisio de Meneses Cordeiro - alisio.cordeiro@serpro.gov.br
+
+
 import requests
+import sys
 import json
 import getopt
-resposta = requests.get("http://localhost:8081/colibri/stats")
-parametros = ['conferences','participants','largest_conference','videochannels','videostreams','bit_rate_upload','bit_rate_download','endpoints_sending_audio','endpoints_sending_video']
+
+versao= '1.0'
+servidor = "localhost"
+porta = "8081"
+
+
+# resposta = requests.get("http://localhost:8081/colibri/stats")
+# parametros = ['conferences','participants','largest_conference','videochannels','videostreams','bit_rate_upload','bit_rate_download','endpoints_sending_audio','endpoints_sending_video']
+# for parametro in parametros:
+#     print(str(parametro) + ': ' + str(resposta.json()[parametro]))
+
+
+options, remainder = getopt.getopt(sys.argv[1:], 's:p:P:', ['servidor=',
+                                                         'porta=',
+                                                         'parametros=',
+                                                         ])
+
+for opt, arg in options:
+    if opt in ('-s', '--servidor'):
+        servidor = arg
+    elif opt in ('-p', '--porta'):
+        porta = arg
+    elif opt in ('-P', '--parametros'):
+        parametros = arg.split(',')
+
+
+print ("Coletando dados do servidor " + servidor + ", na porta " + porta + ".")
+# print ('PORTA   :' + porta)
+# print ('PARAMETROS    :' + parametros)
+
+resposta = requests.get("http://" + servidor + ":" + porta + "/colibri/stats")
+try:
+    parametros
+except NameError:
+    parametros = []
+    for parametro in resposta.json():
+        parametros.append(parametro)
+
 for parametro in parametros:
     print(str(parametro) + ': ' + str(resposta.json()[parametro]))
