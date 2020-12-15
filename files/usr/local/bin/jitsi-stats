@@ -1,32 +1,5 @@
 #!/usr/bin/env python3
 #-*- coding:utf-8 -*-
-# Conecta no servidor jitsi JVB, coleta statísticas e exibe a informação desejada
-# uso:
-#   jitsi-stats [-s <IP_DO_SERVIDOR>] [-p <PORTA_DA_INTERFACE_COLIBRI>] [-P <NOME_DO_PARAMETRO>]
-#
-# Onde:
-#   -s, --servidor      endereço IP do servidor a se conectar. Default: localhost
-#   -p, --porta         porta da interface rest colibri. Default: 8081
-#   -P, --parametros    parâmetros a exibir separado por virgula. Default: mostra todos os parâmetros
-#
-# Exemplo:
-#
-#  Exibir todas as parâmetros do servidor localhost:
-#
-#    jitsi-stats
-#
-# Exibir todos os parâmetros do servidor 192.168.0.10
-#
-#   jitsi-stats -s 192.168.0.10
-#
-# Exibir parâmetro 'conferences' do servidor 192.168.0.10 que escuta na porta 8080
-#
-# jitsi-stats -s 192.168.0.10 -p 8080 -P conferences
-#
-# Exibir multiplos parâmetros 'conferences,participants' do servidor 192.168.0.10 que escuta na porta 8080
-# jitsi-stats -s 192.168.0.10 -p 8080 -P conferences,participants
-#
-# AUTOR: Antonio Alisio de Meneses Cordeiro - alisio.cordeiro@serpro.gov.br
 
 
 import requests
@@ -34,20 +7,51 @@ import sys
 import json
 import getopt
 
-versao= '1.0'
+versao= '1.1'
 servidor = "localhost"
 porta = "8081"
 
+def exibir_help():
+    print(
+    '''
+App: Conectar em servidor jitsi JVB, coletar statísticas e exibir as informações desejadas
+uso:
+  jitsi-stats [-s <IP_DO_SERVIDOR>] [-p <PORTA_DA_INTERFACE_COLIBRI>] [-P <NOME_DO_PARAMETRO>]
 
-# resposta = requests.get("http://localhost:8081/colibri/stats")
-# parametros = ['conferences','participants','largest_conference','videochannels','videostreams','bit_rate_upload','bit_rate_download','endpoints_sending_audio','endpoints_sending_video']
-# for parametro in parametros:
-#     print(str(parametro) + ': ' + str(resposta.json()[parametro]))
+Onde:
+  -s, --servidor      endereço IP do servidor a se conectar. Default: localhost
+  -p, --porta         porta da interface rest colibri. Default: 8081
+  -P, --parametros    parâmetros a exibir separado por virgula. Default: mostra todos os parâmetros
+
+Exemplo:
+
+ Exibir todas as parâmetros do servidor localhost:
+
+   jitsi-stats
+
+Exibir todos os parâmetros do servidor 192.168.0.10
+
+  jitsi-stats -s 192.168.0.10
+
+Exibir parâmetro 'conferences' do servidor 192.168.0.10 que escuta na porta 8080
+
+jitsi-stats -s 192.168.0.10 -p 8080 -P conferences
+
+Exibir multiplos parâmetros 'conferences,participants' do servidor 192.168.0.10 que escuta na porta 8080
+jitsi-stats -s 192.168.0.10 -p 8080 -P conferences,participants
+
+AUTOR: Antonio Alisio de Meneses Cordeiro - alisio.cordeiro@serpro.gov.br
+
+    '''
+    )
+    quit()
 
 
-options, remainder = getopt.getopt(sys.argv[1:], 's:p:P:', ['servidor=',
+
+options, remainder = getopt.getopt(sys.argv[1:], 's:p:P:h', ['servidor=',
                                                          'porta=',
                                                          'parametros=',
+                                                         'help',
                                                          ])
 
 for opt, arg in options:
@@ -57,19 +61,22 @@ for opt, arg in options:
         porta = arg
     elif opt in ('-P', '--parametros'):
         parametros = arg.split(',')
+    elif opt in ('-h', '--help'):
+        exibir_help()
 
-
-print ("Coletando dados do servidor " + servidor + ", na porta " + porta + ".")
-# print ('PORTA   :' + porta)
-# print ('PARAMETROS    :' + parametros)
 
 resposta = requests.get("http://" + servidor + ":" + porta + "/colibri/stats")
 try:
     parametros
 except NameError:
+    print ("Coletando dados do servidor " + servidor + ", na porta " + porta + ".")
     parametros = []
     for parametro in resposta.json():
-        parametros.append(parametro)
-
-for parametro in parametros:
-    print(str(parametro) + ': ' + str(resposta.json()[parametro]))
+        print(str(parametro) + ': ' + str(resposta.json()[parametro]))
+else:
+    if len(parametros) > 1:
+        print ("Coletando dados do servidor " + servidor + ", na porta " + porta + ".")
+        for parametro in parametros:
+            print(str(parametro) + ': ' + str(resposta.json()[parametro]))
+    else:
+        print(resposta.json()[parametros[0]])
