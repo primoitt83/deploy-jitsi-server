@@ -15,6 +15,7 @@ REFLETORA_PORTA: 1935
 #
 # Escolher quais serviços instalar
 #
+desabilitar_suporte_ipv6: true
 INSTALAR_SERVICO_WEB: true
 INSTALAR_SERVICO_PROSODY: true
 INSTALAR_SERVICO_JICOFO: true

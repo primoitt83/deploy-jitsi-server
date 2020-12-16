@@ -66,9 +66,17 @@
     chdir: "{{ INSTALACAO_PASTA }}/"
   when: compose_file_status.changed
 
-- name: Reiniciar Stack
-  shell: |
-    docker-compose restart || true
-  args:
-    chdir: "{{ INSTALACAO_PASTA }}/"
-  when: reiniciar_stack.changed
+- name: Configurar uso de IPv6 no serviço Web na porta 80
+  lineinfile:
+    path: "{{INSTALACAO_PASTA_WEB}}/nginx/site-confs/default"
+    regexp: listen \[::\]:80 default_server
+    line: '#  listen [::]:80 default_server;'
+  when: desabilitar_suporte_ipv6
+
+- name: Configurar uso de IPv6 no serviço Web na porta 443
+  lineinfile:
+    path: "{{INSTALACAO_PASTA_WEB}}/nginx/site-confs/default"
+    regexp: listen \[::\]:443 ssl http2
+    line: '#  listen [::]:443 ssl http2;'
+    # state: absent
+  when: desabilitar_suporte_ipv6
