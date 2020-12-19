@@ -82,6 +82,11 @@
     chdir: "{{ INSTALACAO_PASTA }}/"
   when: compose_file_status.changed
 
+- name: "Aguardar carga do serviço web na porta https: {{HTTPS_PORT}}"
+  wait_for:
+    port: "{{HTTPS_PORT}}"
+    timeout: 300
+
 - name: Configurar uso de IPv6 no serviço Web na porta 80
   lineinfile:
     path: "{{INSTALACAO_PASTA_WEB}}/nginx/site-confs/default"
