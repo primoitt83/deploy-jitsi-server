@@ -93,6 +93,7 @@
     regexp: listen \[::\]:80 default_server
     line: '#  listen [::]:80 default_server;'
   when: desabilitar_suporte_ipv6
+  register: nginx_config_arquivo
 
 - name: Configurar uso de IPv6 no serviço Web na porta 443
   lineinfile:
