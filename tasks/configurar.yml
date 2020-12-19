@@ -106,7 +106,7 @@
 
 - name: Aplicando alterações de configuração  IPv6
   shell: |
-    docker-compose restart {{CONTAINER_NOME_WEB}}
+    docker restart {{CONTAINER_NOME_WEB}}
   args:
     chdir: "{{ INSTALACAO_PASTA }}/"
   when: nginx_config_arquivo.changed
