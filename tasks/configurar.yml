@@ -8,6 +8,22 @@
     create: yes
   when: INSTALAR_SERVICO_JIBRI
 
+- name: Definir limite de arquivos e processos abertos (/etc/systemd/system.conf)
+  lineinfile:
+    path: /etc/systemd/system.conf
+    regexp: "^{{item.parametro}}=.*"
+    line: "{{item.parametro}}={{item.valor}}"
+    backup: yes
+  with_items:
+    - { parametro: DefaultLimitNOFILE, valor: 65000 }
+    - { parametro: DefaultLimitNPROC, valor: 65000 }
+    - { parametro: DefaultTasksMax, valor: 65000 }
+  register: recarrecar_systemctl_daemon
+
+- name: "Recarregar daemon systemctl: {{recarrecar_systemctl_daemon.changed}}"
+  shell: systemctl daemon-reload
+  when: recarrecar_systemctl_daemon.changed
+
 - name: "Carregar módulo kernel do snd-aloop: {{INSTALAR_SERVICO_JIBRI}}"
   modprobe:
     name: snd-aloop
