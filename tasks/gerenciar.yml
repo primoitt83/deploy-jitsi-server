@@ -4,20 +4,10 @@
     name: "{{container_nome}}"
   register: stack_resultado
 
-- name: Iniciar stack se {{container_nome}} inexistente
+- name: Iniciar stack se {{container_nome}} inexistente ou parado
   shell: |
     docker-compose up -d
   args:
     chdir: "{{ INSTALACAO_PASTA }}/"
-  when: not stack_resultado.exists
-
-- name: "Iniciar stack se {{container_nome}} parado: {{ stack_resultado.container['State']['Status'] }}"
-  shell: |
-    docker-compose up -d
-  args:
-    chdir: "{{ INSTALACAO_PASTA }}/"
-  when: stack_resultado.container['State']['Status'] != "running"
-#
-# - name: teste de concatenacao
-#   debug:
-#     msg: "{{ container_nome.split("_")[1] }}"
+  when: (not stack_resultado.exists) or
+        (stack_resultado.container['State']['Status'] != "running")
