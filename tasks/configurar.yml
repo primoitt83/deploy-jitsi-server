@@ -102,3 +102,11 @@
     line: '#  listen [::]:443 ssl http2;'
     # state: absent
   when: desabilitar_suporte_ipv6
+  register: nginx_config_arquivo
+
+- name: Aplicando alterações de configuração  IPv6
+  shell: |
+    docker-compose restart {{CONTAINER_NOME_WEB}}
+  args:
+    chdir: "{{ INSTALACAO_PASTA }}/"
+  when: nginx_config_arquivo.changed
