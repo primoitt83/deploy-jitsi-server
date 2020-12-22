@@ -73,7 +73,7 @@
     - interface_config.js
   register: reiniciar_stack
 
-- name: Compose file mudou. Reconstruindo o stack
+- name: "Novo compose file ({{ INSTALACAO_PASTA }}/): {{compose_file_status.changed}}. Aplicando alterações"
   shell: |
     docker-compose stop
     docker-compose rm -f
