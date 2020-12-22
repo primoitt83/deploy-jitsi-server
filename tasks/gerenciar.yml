@@ -4,7 +4,7 @@
     name: "{{container_nome}}"
   register: stack_resultado
 
-- name: Iniciar stack se {{container_nome}} inexistente ou parado
+- name: "Iniciar stack se {{container_nome}} inexistente ou parado"
   shell: |
     docker-compose up -d
   args:
