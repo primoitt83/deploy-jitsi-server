@@ -109,3 +109,4 @@
   args:
     chdir: "{{ INSTALACAO_PASTA }}/"
   when: nginx_config_arquivo.changed
+  ignore_errors: yes
