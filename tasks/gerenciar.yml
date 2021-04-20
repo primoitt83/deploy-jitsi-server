@@ -1,8 +1,8 @@
 ---
-- name: "Coletar informações sobre container {{container_nome}}"
-  docker_container_info:
-    name: "{{container_nome}}"
-  register: stack_resultado
+# - name: "Coletar informações sobre container {{container_nome}}"
+#   docker_container_info:
+#     name: "{{container_nome}}"
+#   register: stack_resultado
 
 - name: "Iniciar stack se {{container_nome}} inexistente ou parado"
   shell: |
