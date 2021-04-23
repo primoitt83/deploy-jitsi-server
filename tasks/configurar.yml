@@ -111,7 +111,7 @@
   when: nginx_config_arquivo.changed
   ignore_errors: yes
 
-- name: Executar script chama.sh
+- name: Executar script chama.sh no container WEB
   shell: | 
     docker exec -it chama-jitsi chmod +x /usr/share/jitsi-meet/images/chama.sh
     docker exec -it chama-jitsi sh /usr/share/jitsi-meet/images/chama.sh
