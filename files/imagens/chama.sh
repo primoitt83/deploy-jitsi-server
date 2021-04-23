@@ -1,7 +1,7 @@
 #!/bin/sh
 
 #Copiar arquivo de tradução da home
-cp app.bundle.min.js /usr/share/jitsi-meet/libs/
+cp $PWD/app.bundle.min.js /usr/share/jitsi-meet/libs/
 
 #Correções em arquivos html fora do lugar
 cd /usr/share/jitsi-meet/static
