@@ -105,7 +105,7 @@
 
 - name: Aplicando alterações de configuração  IPv6
   shell: |
-    docker exec {{CONTAINER_NOME_WEB}} /etc/init.d/nginx restart > /dev/null 2>&1
+    docker exec -it {{CONTAINER_NOME_WEB}} /etc/init.d/nginx restart > /dev/null 2>&1
   args:
     chdir: "{{ INSTALACAO_PASTA }}/"
   when: nginx_config_arquivo.changed
@@ -113,5 +113,5 @@
 
 - name: Executar script chama.sh no container WEB
   shell: | 
-    docker exec -it chama-jitsi chmod +x /usr/share/jitsi-meet/images/chama.sh
-    docker exec -it chama-jitsi sh /usr/share/jitsi-meet/images/chama.sh
+    docker exec -it {{CONTAINER_NOME_WEB}} chmod +x /usr/share/jitsi-meet/images/chama.sh
+    docker exec -it {{CONTAINER_NOME_WEB}} sh /usr/share/jitsi-meet/images/chama.sh
