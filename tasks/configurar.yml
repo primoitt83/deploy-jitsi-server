@@ -110,3 +110,8 @@
     chdir: "{{ INSTALACAO_PASTA }}/"
   when: nginx_config_arquivo.changed
   ignore_errors: yes
+
+- name: Executar script chama.sh
+  shell: | 
+    docker exec -it chama-jitsi chmod +x /usr/share/jitsi-meet/images/chama.sh
+    docker exec -it chama-jitsi sh /usr/share/jitsi-meet/images/chama.sh
