@@ -106,7 +106,9 @@
 - name: Copiar arquivo customizado para websockets nos Jvbs
   template:
     src: opt/jitsi/web/meet.conf
-    dest: "{{ INSTALACAO_PASTA_WEB }}/nginx"
+    dest: "{{INSTALACAO_PASTA_WEB}}/nginx"
+
+- name: Impedir que o arquivo seja alterado ao reiniciar o container web
   shell: |
     chattr +i {{ INSTALACAO_PASTA_WEB }}/nginx/meet.conf        
 
