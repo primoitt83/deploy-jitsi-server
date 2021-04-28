@@ -43,10 +43,10 @@
   tags: assets_graficos
   when: INSTALAR_SERVICO_WEB | bool
 
-- name: Copiar arquivo customizado para octo no jvb interno
-  template:
-    src: opt/jitsi/jvb/custom-sip-communicator.properties
-    dest: "{{ INSTALACAO_PASTA }}/jvb"
+# - name: Copiar arquivo customizado para octo no jvb interno
+#   template:
+#     src: opt/jitsi/jvb/custom-sip-communicator.properties
+#     dest: "{{ INSTALACAO_PASTA }}/jvb"
 
 - name: Copiar compose file
   template:
