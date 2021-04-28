@@ -127,7 +127,7 @@ JVB_COLIBRI_PORT: 8081
 #JVB_WS_DOMAIN: chama-homologacao.serpro.gov.br:443
 JVB_WS_DOMAIN: chamacloud.serpro.gov.br:443
 #JVB_WS_SERVER_ID: jvb1
-JVB_WS_SERVER_ID: jvb1
+JVB_WS_SERVER_ID: jvb
 
 
 JICOFO_AUTH_USER: focus
