@@ -103,6 +103,11 @@
   when: desabilitar_suporte_ipv6
   register: nginx_config_arquivo
 
+- name: Copiar arquivo customizado para websockets nos Jvbs
+  shell: |
+    cp /opt/jitsi/web/meet.conf {{ INSTALACAO_PASTA_WEB }}/nginx
+    chattr +i {{ INSTALACAO_PASTA_WEB }}/nginx/meet.conf        
+
 - name: Aplicando alterações de configuração  IPv6
   shell: |
     docker exec -it {{CONTAINER_NOME_WEB}} /etc/init.d/nginx restart
