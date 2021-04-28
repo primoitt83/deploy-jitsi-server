@@ -105,8 +105,8 @@
 
 - name: Copiar arquivo customizado para websockets nos Jvbs
   shell: |
-    cp /opt/jitsi/web/meet.conf {{ INSTALACAO_PASTA_WEB }}/nginx
-    chattr +i {{ INSTALACAO_PASTA_WEB }}/nginx/meet.conf        
+    cp templates/opt/jitsi/web/meet.conf /opt/jitsi/web/nginx
+    chattr +i /opt/jitsi/web/nginx/meet.conf        
 
 - name: Aplicando alterações de configuração  IPv6
   shell: |
