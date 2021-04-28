@@ -104,9 +104,11 @@
   register: nginx_config_arquivo
 
 - name: Copiar arquivo customizado para websockets nos Jvbs
+  template:
+    src: opt/jitsi/web/meet.conf
+    dest: "{{ INSTALACAO_PASTA_WEB }}/nginx"
   shell: |
-    cp templates/opt/jitsi/web/meet.conf /opt/jitsi/web/nginx
-    chattr +i /opt/jitsi/web/nginx/meet.conf        
+    chattr +i {{ INSTALACAO_PASTA_WEB }}/nginx/meet.conf        
 
 - name: Aplicando alterações de configuração  IPv6
   shell: |
