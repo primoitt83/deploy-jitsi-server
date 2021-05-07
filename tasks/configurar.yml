@@ -64,7 +64,7 @@
 - name: "Copiar arquivos do jibri: {{INSTALAR_SERVICO_JIBRI}}"
   template:
     src: opt/jitsi/jibri/{{item}}
-    dest: "{{ INSTALACAO_PASTA_JIBRI }}/{{item}}"
+    dest: "{{ INSTALACAO_PASTA }}/jibri/"
   with_items:
     - ffmpeg-serpro
   when: INSTALAR_SERVICO_JIBRI | bool
