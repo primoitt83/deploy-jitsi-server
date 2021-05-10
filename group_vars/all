@@ -6,7 +6,7 @@ HTTP_PORT: 80
 HTTPS_PORT: 443
 #TZ: America/Fortaleza
 #PUBLIC_URL: https://chama-homologacao.serpro.gov.br
-DOCKER_HOST_ADDRESS: "{{ansible_host}}"
+#DOCKER_HOST_ADDRESS: "{{ansible_host}}"
 #ENABLE_LOBBY: 0 repetida (jicofo)
 instalar_repositorio_serpro: true
 instalar_repositorio_docker: false
@@ -19,7 +19,7 @@ desabilitar_suporte_ipv6: true
 INSTALAR_SERVICO_WEB: true
 INSTALAR_SERVICO_PROSODY: true
 INSTALAR_SERVICO_JICOFO: true
-INSTALAR_SERVICO_JVB: false
+INSTALAR_SERVICO_JVB: true
 INSTALAR_SERVICO_JIBRI: true
 
 IMAGEM_TAG: stable-5142
@@ -115,19 +115,19 @@ JIGASI_SIP_TRANSPORT:
 #JVB_BREWERY_MUC: jvbbrewery
 #JVB_AUTH_USER: jvb
 #JVB_STUN_SERVERS: meet-jit-si-turnrelay.jitsi.net:443
-JVB_STUN_SERVERS:
-JVB_PORT: 10000
-JVB_TCP_HARVESTER_DISABLED: false
-JVB_TCP_PORT: 4443
-JVB_TCP_MAPPED_PORT: 4443
-JVB_ENABLE_APIS: rest,colibri
-JVB_COLIBRI_PORT: 8081
+#JVB_STUN_SERVERS:
+#JVB_PORT: 10000
+#JVB_TCP_HARVESTER_DISABLED: false
+#JVB_TCP_PORT: 4443
+#JVB_TCP_MAPPED_PORT: 4443
+#JVB_ENABLE_APIS: rest,colibri
+#JVB_COLIBRI_PORT: 8081
 
 #Para utilizar websockets no jvb interno
 #JVB_WS_DOMAIN: chama-homologacao.serpro.gov.br:443
-JVB_WS_DOMAIN: chamacloud.serpro.gov.br:443
+#JVB_WS_DOMAIN: chamacloud.serpro.gov.br:443
 #JVB_WS_SERVER_ID: jvb1
-JVB_WS_SERVER_ID: jvb
+#JVB_WS_SERVER_ID: jvb
 
 
 #JICOFO_AUTH_USER: focus
@@ -239,7 +239,7 @@ CONFIG_BOSH_HOST:
 
 #Vars para ativar websockets
 #ENABLE_XMPP_WEBSOCKET: 1
-ENABLE_COLIBRI_WEBSOCKET: 1
+#ENABLE_COLIBRI_WEBSOCKET: 1
 #XMPP_CROSS_DOMAIN:
 
 #Novas vars para jicofo
@@ -439,8 +439,28 @@ OCTO_BRIDGE_SELECTION_STRATEGY: SplitBridgeSelectionStrategy
 #XMPP_MUC_DOMAIN: repetida (web)
 XMPP_SERVER: xmpp.chamacloud.serpro.gov.br
 
+#jvb
+DOCKER_HOST_ADDRESS: "{{ansible_host}}"
+#XMPP_AUTH_DOMAIN: repetida (web)
+#XMPP_INTERNAL_MUC_DOMAIN: repetida (prosody)
+#XMPP_SERVER: repetida (jicofo)
+#JVB_AUTH_USER: repetida (prosody)
+#JVB_AUTH_PASSWORD: repetida (prosody)
+#JVB_BREWERY_MUC: repetida (jicofo)
+JVB_PORT: 10000
+JVB_TCP_HARVESTER_DISABLED: false
+JVB_TCP_PORT: 4443
+JVB_TCP_MAPPED_PORT: 4443
+JVB_STUN_SERVERS:
+JVB_ENABLE_APIS: rest,colibri
+JVB_WS_DOMAIN: chamacloud.serpro.gov.br:443
+JVB_WS_SERVER_ID: jvb
+#PUBLIC_URL: repetida (web)
+#TZ: repetida (web)
 
-
+#vars do JVB que não estão no compose originalmente
+ENABLE_COLIBRI_WEBSOCKET: 1
+JVB_COLIBRI_PORT: 8081
 
 
 #Vars preenchidas como exemplo
