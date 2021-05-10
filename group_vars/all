@@ -352,6 +352,5 @@ TOKEN_AUTH_URL:
 
 
 #Vars preenchidas como exemplo
-
 #ETHERPAD_PUBLIC_URL: https://etherpad.my.domain
 #ETHERPAD_URL_BASE: http://etherpad.meet.jitsi:9001
