@@ -314,8 +314,8 @@ ENABLE_SUBDOMAINS:
 ENABLE_TALK_WHILE_MUTED:
 ENABLE_TCC:
 ENABLE_TRANSCRIPTIONS:
-#ETHERPAD_PUBLIC_URL: https://etherpad.my.domain
-#ETHERPAD_URL_BASE: http://etherpad.meet.jitsi:9001
+ETHERPAD_PUBLIC_URL:
+ETHERPAD_URL_BASE:
 GOOGLE_ANALYTICS_ID:
 GOOGLE_API_APP_CLIENT_ID:
 INVITE_SERVICE_URL:
@@ -348,3 +348,10 @@ XMPP_GUEST_DOMAIN: chamacloud.serpro.gov.br
 XMPP_MUC_DOMAIN: muc.chamacloud.serpro.gov.br
 XMPP_RECORDER_DOMAIN: recorder.chamacloud.serpro.gov.br
 TOKEN_AUTH_URL:
+
+
+
+#Vars preenchidas como exemplo
+
+#ETHERPAD_PUBLIC_URL: https://etherpad.my.domain
+#ETHERPAD_URL_BASE: http://etherpad.meet.jitsi:9001
