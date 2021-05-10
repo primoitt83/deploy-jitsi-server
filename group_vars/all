@@ -108,7 +108,7 @@ XMPP_SERVER: xmpp.chamacloud.serpro.gov.br
 #XMPP_AUTH_DOMAIN: auth.chamacloud.serpro.gov.br
 #XMPP_MUC_DOMAIN: muc.chamacloud.serpro.gov.br
 XMPP_INTERNAL_MUC_DOMAIN: internal-muc.chamacloud.serpro.gov.br
-XMPP_GUEST_DOMAIN: chamacloud.serpro.gov.br
+#XMPP_GUEST_DOMAIN: chamacloud.serpro.gov.br
 XMPP_MODULES:
 XMPP_MUC_MODULES:
 XMPP_INTERNAL_MUC_MODULES:
@@ -130,7 +130,7 @@ JVB_WS_DOMAIN: chamacloud.serpro.gov.br:443
 JVB_WS_SERVER_ID: jvb
 
 
-JICOFO_AUTH_USER: focus
+#JICOFO_AUTH_USER: focus
 JIGASI_XMPP_USER: jigasi
 JIGASI_BREWERY_MUC: jigasibrewery
 JIGASI_PORT_MIN: 20000
@@ -319,7 +319,7 @@ ENABLE_TRANSCRIPTIONS:
 GOOGLE_ANALYTICS_ID:
 GOOGLE_API_APP_CLIENT_ID:
 INVITE_SERVICE_URL:
-JICOFO_AUTH_USER:
+JICOFO_AUTH_USER: focus
 MATOMO_ENDPOINT:
 MATOMO_SITE_ID:
 MICROSOFT_API_APP_CLIENT_ID:
