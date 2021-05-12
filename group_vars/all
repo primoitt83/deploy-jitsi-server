@@ -9,8 +9,8 @@
 #LETSENCRYPT_DOMAIN: meet.example.com repetida (web)
 #LETSENCRYPT_EMAIL: alice@atlanta.net (web)
 #LETSENCRYPT_USE_STAGING: 0 (web)
-ansible_python_interpreter=/usr/bin/python3
-IMAGEM_TAG=stable-5390-3
+ansible_python_interpreter: /usr/bin/python3
+IMAGEM_TAG: stable-5390-3
 instalar_repositorio_serpro: true
 instalar_repositorio_docker: false
 #
