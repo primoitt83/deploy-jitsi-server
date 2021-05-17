@@ -13,16 +13,16 @@ config.constraints.video.width = { ideal: 1280, min: 320, max: 1280};
 //Deixar simulcast ativado (false) ou desativado (true)
 config.disableSimulcast = false;
 
-//Sempre entrar com audio desativado
-config.startWithVideoMuted = true;
+//Só fazer sentido se mudar o startVideoMuted
+//config.startWithVideoMuted = true;
 
-//Limitar o numero de cameras abertas
+//O 10o participante entrará com vídeo mudo
 config.startVideoMuted = 9;
 
-//Sempre entrar com audio desativado
-config.startWithAudioMuted = true;
+//Só fazer sentido se mudar o startAudioMuted
+//config.startWithAudioMuted = true;
 
-//Limitar o numero de microfones abertos
+//O 5o participante entrará com audio mudo
 config.startAudioMuted = 4;
 
 //Ultimas 5 cameras poderao ficar abertas
@@ -58,7 +58,7 @@ config.enableTalkWhileMuted = true;
 config.maxFullResolutionParticipants = 5;
 //
 //
-config.desktopSharingFrameRate = { min: 5, max: 30 };
+config.desktopSharingFrameRate = { min: 5, max: 5 };
 //
 //
 //config.videoQuality = { preferredCodec: 'VP9' };
