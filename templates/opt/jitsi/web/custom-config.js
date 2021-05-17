@@ -27,7 +27,7 @@ config.startAudioMuted = 4;
 
 //Ultimas 5 cameras poderao ficar abertas
 config.channelLastN = 16;
-
+//
 //Limitar o número de streams enviados pelo simulcast
 config.lastNLimits = { 5: 16, 30: 12, 50: 9, 70: 4, 90: 2};
 
