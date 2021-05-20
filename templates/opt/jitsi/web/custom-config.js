@@ -67,7 +67,7 @@ config.desktopSharingFrameRate = { min: 5, max: 5 };
 config.videoQuality.maxBitratesVideo = { low: 200000, standard: 500000, high: 1500000 };
 //
 //Começar com uma banda de 800kbits
-config.startBitrate = '800';
+//config.startBitrate = '800'; Ativar isso deu crash.. deve tá com sintaxe errada
 //
 //
 config.videoQuality.minHeightForQualityLvl = { 360: 'standard', 720: 'high' };
